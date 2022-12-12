@@ -47,6 +47,7 @@ const Home = () => {
             onClick={() => setToggleSidebar(true)}
             className='cursor-pointer'
           />
+          {console.log(toggleSidebar)}
         </div>
         {toggleSidebar && (
           <div className='fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10'>
@@ -54,7 +55,7 @@ const Home = () => {
               <AiFillCloseCircle
                 fontSize={30}
                 className='cursor-pointer'
-                onClick={setToggleSidebar(false)}
+                onClick={() => setToggleSidebar(false)}
               />
             </div>
             <Sidebar closeToggle={setToggleSidebar} />
