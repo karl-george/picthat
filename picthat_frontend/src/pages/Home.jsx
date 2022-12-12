@@ -36,7 +36,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='flex bg-gray-500 md:flex-row flex-col h-screen'>
+    <div className='flex bg-gray-500 md:flex-row flex-col h-screen transition-height duration-75 ease-out'>
       <div className='hidden md:flex h-screen flex-initial'>
         <Sidebar />
       </div>
@@ -47,10 +47,9 @@ const Home = () => {
             onClick={() => setToggleSidebar(true)}
             className='cursor-pointer'
           />
-          {console.log(toggleSidebar)}
         </div>
         {toggleSidebar && (
-          <div className='fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10'>
+          <div className='fixed w-3/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in'>
             <div className='absolute w-full flex justify-end items-center p-2'>
               <AiFillCloseCircle
                 fontSize={30}
