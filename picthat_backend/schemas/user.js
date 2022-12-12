@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: 'userName',
-      title: 'UserName',
+      title: 'User Name',
       type: 'string',
     },
     {
