@@ -10,12 +10,15 @@ const Login = () => {
   };
 
   return (
-    <GoogleOAuthProvider>
+    <GoogleOAuthProvider
+      clientId={import.meta.env.VITE_REACT_APP_GOOGLE_API_TOKEN}
+    >
       <div className='flex flex-col justify-center items-center h-screen shadow-2xl'>
         <img src={logo} alt='Pic That logo' className='w-36 mb-8' />
         <GoogleLogin
           onSuccess={credentialResponse}
           onError={credentialResponse}
+          cookiePolicy='single_host_origin'
         />
       </div>
     </GoogleOAuthProvider>
