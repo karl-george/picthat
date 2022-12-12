@@ -10,9 +10,11 @@ import logo from '../assets/logo-no-background.png';
 const Home = () => {
   const [user, setUser] = useState();
 
+  // Fetch user from localstorage
   const userInfo = fetchUser();
 
   useEffect(() => {
+    // Get users info
     const query = userQuery(userInfo?.sub);
 
     client.fetch(query).then((data) => {
