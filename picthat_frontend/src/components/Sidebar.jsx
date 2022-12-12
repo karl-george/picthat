@@ -34,15 +34,26 @@ const Sidebar = ({ closeToggle }) => {
             }
             onClick={handleCloseSidebar}
           >
-            Discover
+            <img
+              src='https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80'
+              alt='category'
+              className='w-8 h-8 rounded-full shadow-sm'
+            />
+            Home
           </NavLink>
-          {categories.slice(0, categories.length - 1).map((category) => (
+          {categories.slice(0, categories.length - 1).map((category, i) => (
             <NavLink
               to={`/category/${category.name}`}
               className={({ isActive }) =>
                 isActive ? isActiveStyle : isNotActiveStyle
               }
+              key={i}
             >
+              <img
+                src={category.image}
+                alt='category'
+                className='w-8 h-8 rounded-full shadow-sm'
+              />
               {category.name}
             </NavLink>
           ))}
