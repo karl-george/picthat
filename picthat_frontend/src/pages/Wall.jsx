@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import {
@@ -9,6 +10,8 @@ import {
 } from '../components/index.js';
 
 const Wall = ({ user }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <div className='px-2 md:px-5'>
       <div className='bg-gray-50'>
@@ -20,7 +23,12 @@ const Wall = ({ user }) => {
           <Route path='/category/:categoryId' element={<Posts />} />
           <Route path='/post-details/:postId' element={<PostDetails />} />
           <Route path='/create-post' element={<CreatePost user={user} />} />
-          <Route path='/search' element={<Search />} />
+          <Route
+            path='/search'
+            element={
+              <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            }
+          />
         </Routes>
       </div>
     </div>
