@@ -29,13 +29,11 @@ const Posts = () => {
     }
   }, [categoryId]);
 
-  return (
-    <div>
-      {loading && <Spinner msg={'Adding ideas to your wall'} />}
-      {!posts?.length && <h2>No posts found</h2>}
-      {posts && <MasonryLayout posts={posts} />}
-    </div>
-  );
+  if (loading) return <Spinner msg={'Adding ideas to your wall'} />;
+
+  if (!posts?.length) return <h2>No posts found</h2>;
+
+  return <div>{posts && <MasonryLayout posts={posts} />}</div>;
 };
 
 export default Posts;
