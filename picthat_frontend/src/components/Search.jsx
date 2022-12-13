@@ -1,7 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 
-const Search = () => {
-  return <div>Search</div>;
+import Spinner from './Spinner';
+
+const Search = ({ searchTerm, setSearchTerm, user }) => {
+  const [loading, setLoading] = useState(true);
+
+  return <div>{loading && <Spinner msg='Searching for posts' />}</div>;
 };
 
 export default Search;
