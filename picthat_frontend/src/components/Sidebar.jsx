@@ -48,6 +48,7 @@ const Sidebar = ({ closeToggle }) => {
                 isActive ? isActiveStyle : isNotActiveStyle
               }
               key={i}
+              onClick={handleCloseSidebar}
             >
               <img
                 src={category.image}
