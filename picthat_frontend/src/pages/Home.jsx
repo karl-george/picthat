@@ -12,7 +12,6 @@ import { fetchUser } from '../utils/fetchUser';
 import { userQuery } from '../utils/queries';
 
 import logo from '../assets/logo-no-background.png';
-import { useInsertionEffect } from 'react';
 
 const Home = () => {
   const [user, setUser] = useState();
@@ -36,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='flex bg-gray-500 md:flex-row flex-col h-screen transition-height duration-75 ease-out'>
+    <div className='flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out'>
       <div className='hidden md:flex h-screen flex-initial'>
         <Sidebar />
       </div>
@@ -47,6 +46,12 @@ const Home = () => {
             onClick={() => setToggleSidebar(true)}
             className='cursor-pointer'
           />
+          <Link to='/'>
+            <img src={logo} alt='logo' className='w-14' />
+          </Link>
+          <Link to={`user/${user?._id}`}>
+            <img src={user?.image} alt='user profile' className='w-14' />
+          </Link>
         </div>
         {toggleSidebar && (
           <div className='fixed w-3/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in'>
