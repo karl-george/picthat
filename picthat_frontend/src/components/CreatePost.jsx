@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BsUpload } from 'react-icons/bs';
+import { BsUpload, BsFillTrashFill } from 'react-icons/bs';
 
 import { client } from '../client';
 import Spinner from './Spinner';
@@ -52,7 +52,7 @@ const CreatePost = ({ user }) => {
 
   return (
     <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
-      <div className='flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full'>
+      <div className='flex flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full'>
         <div className='bg-secondaryColor p-3 flex flex-0.7 w-full'>
           <div className='flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420'>
             {loading && <Spinner />}
@@ -86,13 +86,45 @@ const CreatePost = ({ user }) => {
                 />
                 <button
                   type='button'
-                  className=''
+                  className='absolute bottom-3 right-3 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out'
                   onClick={() => setImage(null)}
                 >
-                  Delete
+                  <BsFillTrashFill />
                 </button>
               </div>
             )}
+          </div>
+        </div>
+
+        <div className='flex flex-1 flex-col gap-6 lg:pl-5 mt-5 w-full'>
+          <input
+            type='text'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='Add your title here'
+            className='outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2'
+          />
+          <input
+            type='text'
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+            placeholder='Describe your picture here'
+            className='outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2'
+          />
+          <input
+            type='text'
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder='Add an external link'
+            className='outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2'
+          />
+          <div className='flex flex-col'>
+            <div>
+              <p>Choose a Category</p>
+              <select onChange={(e) => setCategory(e.target.value)}>
+                <option value='other'>Select Category</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
