@@ -18,8 +18,24 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
     ?.length;
 
   const bookmarkPost = (id) => {
-    if (isBookmarked) {
-      // Sanity patch, insert save array, commit, reload window.
+    if (!isBookmarked) {
+      client
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert('after', 'save[-1]', [
+          {
+            key: uuid(),
+            userId: user?.sub,
+            postedBy: {
+              _type: 'postedBy',
+              _ref: user?.sub,
+            },
+          },
+        ])
+        .commit()
+        .then(() => {
+          window.location.reload();
+        });
     }
   };
 
@@ -56,7 +72,6 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
               {isBookmarked ? (
                 <button
                   type='button'
-                  onClick={(e) => e.stopPropagation()}
                   className='opacity-75 hover:opacity-100 outline-none bg-white p-2 rounded-full hover:shadow-md'
                 >
                   <BsBookmarkFill />
@@ -74,6 +89,7 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
                 </button>
               )}
             </div>
+            <div className='bg-white '>{postedBy.userName}</div>
           </div>
         )}
       </div>
