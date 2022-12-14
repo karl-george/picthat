@@ -50,6 +50,10 @@ const CreatePost = ({ user }) => {
     }
   };
 
+  const savePost = (second) => {
+    third;
+  };
+
   return (
     <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
       <div className='flex flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full'>
@@ -119,11 +123,34 @@ const CreatePost = ({ user }) => {
             className='outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2'
           />
           <div className='flex flex-col'>
-            <div>
-              <p>Choose a Category</p>
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value='other'>Select Category</option>
+            <div className='mb-2 font-semibold text-lg sm:text-xl'>
+              <p>Choose a category</p>
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                className='outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer'
+              >
+                <option value='other' className='bg-white'>
+                  Select Category
+                </option>
+                {categories.map((category, i) => (
+                  <option
+                    key={i}
+                    value={category.name}
+                    className='text-base border-0 outline-none capitalize bg-white text-black'
+                  >
+                    {category.name}
+                  </option>
+                ))}
               </select>
+            </div>
+            <div className='flex justify-end items-end mt-5'>
+              <button
+                type='button'
+                onClick={savePost}
+                className='bg-accent text-white font-bold p-2 rounded-full w-28 outline-none'
+              >
+                Save Post
+              </button>
             </div>
           </div>
         </div>
