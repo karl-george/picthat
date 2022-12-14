@@ -23,7 +23,18 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
           alt='user post'
           className='rounded-lg w-full'
         />
-        {console.log(isHovered)}
+        {isHovered && (
+          <div
+            className='absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50
+            bg-gradient-to-t from-black hover:opacity-75'
+          >
+            <div className='flex items-center justify-between'>
+              <div className='flex gap-2'>
+                <a href=''></a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <Link
         to={`user/${postedBy?._id}`}
