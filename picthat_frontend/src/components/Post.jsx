@@ -7,9 +7,7 @@ import { BsCloudDownload, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
 
-const Post = ({
-  post: { postedBy, image, _id, name, about, title, url, save },
-}) => {
+const Post = ({ post: { postedBy, image, _id, title, save } }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
@@ -91,10 +89,7 @@ const Post = ({
                 </button>
               )}
             </div>
-            <div className='bg-white '>
-              {name}
-              {console.log(title)}
-            </div>
+            <div className='text-white p-2 text-xl'>{title}</div>
           </div>
         )}
       </div>
