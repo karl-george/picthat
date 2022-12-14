@@ -11,11 +11,11 @@ import { categories } from '../utils/data';
 const CreatePost = ({ user }) => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
-  const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState(null);
   const [image, setImage] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
+  const [filledAllFields, setFilledAllFields] = useState(true);
 
   const navigate = useNavigate();
 
@@ -50,12 +50,41 @@ const CreatePost = ({ user }) => {
     }
   };
 
-  const savePost = (second) => {
-    third;
+  const savePost = () => {
+    if (title && about && image?._id && category) {
+      const doc = {
+        _type: 'post',
+        title,
+        about,
+        image: {
+          _type: 'image',
+          asset: {
+            _type: 'reference',
+            _ref: image?._id,
+          },
+        },
+        userId: user._id,
+        postedBy: {
+          _type: 'postedBy',
+          _ref: user._id,
+        },
+        category,
+      };
+
+      client.create(doc).then(() => navigate('/'));
+    } else {
+      setFilledAllFields(false);
+      setTimeout(() => setFilledAllFields(true), 2000);
+    }
   };
 
   return (
     <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
+      {!filledAllFields && (
+        <p className='text-red-500 mb-5 text-xl transition-all duration-150 ease-in'>
+          Please fill in all required fields
+        </p>
+      )}
       <div className='flex flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full'>
         <div className='bg-secondaryColor p-3 flex flex-0.7 w-full'>
           <div className='flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420'>
@@ -113,13 +142,6 @@ const CreatePost = ({ user }) => {
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             placeholder='Describe your picture here'
-            className='outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2'
-          />
-          <input
-            type='text'
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder='Add an external link'
             className='outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2'
           />
           <div className='flex flex-col'>
