@@ -22,7 +22,7 @@ const CreatePost = ({ user }) => {
   const uploadImage = (e) => {
     const { type, name } = e.target.files[0];
 
-    // Check image type is correct else wrong image type
+    // Check image type is correct
     if (
       type === 'image/png' ||
       type === 'image/svg' ||
@@ -78,7 +78,20 @@ const CreatePost = ({ user }) => {
                 />
               </label>
             ) : (
-              <div></div>
+              <div className='relative h-full'>
+                <img
+                  src={image?.url}
+                  alt='uploaded pic'
+                  className='w-full h-full'
+                />
+                <button
+                  type='button'
+                  className=''
+                  onClick={() => setImage(null)}
+                >
+                  Delete
+                </button>
+              </div>
             )}
           </div>
         </div>
