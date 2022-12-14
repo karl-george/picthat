@@ -7,7 +7,9 @@ import { BsCloudDownload, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
 
-const Post = ({ post: { postedBy, image, _id, url, save } }) => {
+const Post = ({
+  post: { postedBy, image, _id, name, about, title, url, save },
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
         .setIfMissing({ save: [] })
         .insert('after', 'save[-1]', [
           {
-            key: uuid(),
+            _key: uuid(),
             userId: user?.sub,
             postedBy: {
               _type: 'postedBy',
@@ -89,7 +91,10 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
                 </button>
               )}
             </div>
-            <div className='bg-white '>{postedBy.userName}</div>
+            <div className='bg-white '>
+              {name}
+              {console.log(title)}
+            </div>
           </div>
         )}
       </div>
