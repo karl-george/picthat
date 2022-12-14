@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+
 import { BsCloudDownload, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
 import { client, urlFor } from '../client';
@@ -10,6 +12,16 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
 
   const navigate = useNavigate();
   const user = fetchUser();
+
+  // Double bang to force boolean
+  const isBookmarked = !!save?.filter((item) => item.postedBy._id === user.sub)
+    ?.length;
+
+  const bookmarkPost = (id) => {
+    if (isBookmarked) {
+      // Sanity patch, insert save array, commit, reload window.
+    }
+  };
 
   return (
     <div className='m-2'>
@@ -40,6 +52,27 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
                   <BsCloudDownload />
                 </a>
               </div>
+
+              {isBookmarked ? (
+                <button
+                  type='button'
+                  onClick={(e) => e.stopPropagation()}
+                  className='opacity-75 hover:opacity-100 outline-none bg-white p-2 rounded-full hover:shadow-md'
+                >
+                  <BsBookmarkFill />
+                </button>
+              ) : (
+                <button
+                  type='button'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    bookmarkPost(_id);
+                  }}
+                  className='opacity-75 hover:opacity-100 outline-none bg-white p-2 rounded-full hover:shadow-md'
+                >
+                  <BsBookmark />
+                </button>
+              )}
             </div>
           </div>
         )}
