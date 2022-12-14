@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { BsCloudDownload, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
@@ -30,7 +31,14 @@ const Post = ({ post: { postedBy, image, _id, url, save } }) => {
           >
             <div className='flex items-center justify-between'>
               <div className='flex gap-2'>
-                <a href=''></a>
+                <a
+                  href={`${image?.asset?.url}?dl=`}
+                  download
+                  onClick={(e) => e.stopPropagation()}
+                  className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none'
+                >
+                  <BsCloudDownload />
+                </a>
               </div>
             </div>
           </div>
