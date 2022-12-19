@@ -43,7 +43,7 @@ const PostDetails = () => {
           className='rounded-t-3xl rounded-b-lg'
         />
       </div>
-      <div className='w-full p-5 flex-1 xl:min-w-620'>
+      <div className='w-full p-5 flex-1 xl:min-w-620 xl:ml-5'>
         <div className='flex items-center justify-between'>
           <div className='flex gap-2 items-center'>
             <a
@@ -60,7 +60,21 @@ const PostDetails = () => {
           <h1 className='text-4xl font-bold break-words mt-3'>
             {postDetails.title}
           </h1>
+          <p className='mt-3'>{postDetails.about}</p>
         </div>
+        <Link
+          to={`user/${postDetails.postedBy?._id}`}
+          className='flex gap-2 mt-5 items-center bg-white rounded-lg'
+        >
+          <img
+            src={postDetails.postedBy?.image}
+            alt='user profile'
+            className='w-8 h-8 rounded-full object-cover'
+          />
+          <p className='font font-semibold capitalize'>
+            {postDetails.postedBy?.userName}
+          </p>
+        </Link>
       </div>
     </div>
   );
