@@ -21,7 +21,10 @@ const Wall = ({ user }) => {
         <Routes>
           <Route path='/' element={<Posts />} />
           <Route path='/category/:categoryId' element={<Posts />} />
-          <Route path='/post-details/:postId' element={<PostDetails />} />
+          <Route
+            path='/post-details/:postId'
+            element={<PostDetails user={user} />}
+          />
           <Route path='/create-post' element={<CreatePost user={user} />} />
           <Route
             path='/search'
