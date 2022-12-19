@@ -53,3 +53,41 @@ export const postsQuery = `*[_type == "post"] | order(_createdAt desc) {
         },
       },
     } `;
+
+export const postDetailQuery = (postId) => {
+  const query = `*[_type == "post" && _id == '${postId}']{
+        image{
+          asset->{
+            url
+          }
+        },
+        _id,
+        title,
+        about,
+        category,
+        url,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+        save[]{
+          postedBy->{
+            _id,
+            userName,
+            image
+          },
+        },
+        comments[]{
+          comment,
+          _key,
+          postedBy->{
+            _id,
+            userName,
+            image
+          },
+        },
+      }`;
+
+  return query;
+};
