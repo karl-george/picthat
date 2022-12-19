@@ -91,3 +91,32 @@ export const postDetailQuery = (postId) => {
 
   return query;
 };
+
+export const additionalPostsQuery = (post) => {
+  const query = `*[_type == "post" && category == '${post.category}' && _id != '${post._id}'] {
+    image{
+      asset->{
+        url
+      }
+    },
+    _id,
+    title,
+    about,
+    category,
+    url,
+    postedBy->{
+      _id,
+      userName,
+      image
+    },
+    save[]{
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    },
+  }`;
+
+  return query;
+};
