@@ -12,8 +12,33 @@ import { postDetailQuery } from '../utils/queries';
 
 const PostDetails = () => {
   const [postDetails, setPostDetails] = useState(null);
+  const [comment, setComment] = useState('');
+  const [addingComment, setAddingComment] = useState(false);
 
   const { postId } = useParams();
+
+  const addComment = () => {
+    if (comment) {
+      setAddingComment(true);
+
+      client
+        .patch(postId)
+        .setIfMissing({ comments: [] })
+        .insert('after', 'comments[-1]', [
+          {
+            comment,
+            _key: uuidv4(),
+            postedBy: { _type: 'postedBy', _ref: user._id },
+          },
+        ])
+        .commit()
+        .then(() => {
+          fetchPostDetails();
+          setComment('');
+          setAddingComment(false);
+        });
+    }
+  };
 
   const fetchPostDetails = () => {
     let query = postDetailQuery(postId);
@@ -75,6 +100,25 @@ const PostDetails = () => {
             {postDetails.postedBy?.userName}
           </p>
         </Link>
+        <h2 className='mt-12 text-2xl'>Comments</h2>
+        <div className='max-h-370 overflow-y-auto'>
+          {postDetails?.comments?.map((comment, i) => (
+            <div
+              className='flex gap-2 mt-3 items-center bg-white rounded-lg'
+              key={i}
+            >
+              <img
+                src={comment.postedBy.image}
+                alt='user-image'
+                className='w-8 h-8 rounded-full cursor-pointer'
+              />
+              <div className='flex flex-col'>
+                <p className='font-bold'>{comment.postedBy?.userName}</p>
+                <p>{comment.comment}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
