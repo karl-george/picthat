@@ -7,6 +7,7 @@ import {
   PostDetails,
   CreatePost,
   Search,
+  UserProfile,
 } from '../components/index.js';
 
 const Wall = ({ user }) => {
@@ -32,6 +33,7 @@ const Wall = ({ user }) => {
               <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             }
           />
+          <Route path='/user/:userId' element={<UserProfile />} />
         </Routes>
       </div>
     </div>

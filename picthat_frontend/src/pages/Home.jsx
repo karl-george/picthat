@@ -3,7 +3,6 @@ import { Link, Routes, Route } from 'react-router-dom';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-import UserProfile from '../components/UserProfile';
 import Sidebar from '../components/Sidebar';
 import Wall from './Wall';
 
@@ -69,7 +68,6 @@ const Home = () => {
 
       <div className='pb-2 flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
         <Routes>
-          <Route path='/user/:userId' element={<UserProfile />} />
           <Route path='/*' element={<Wall user={user && user} />} />
         </Routes>
       </div>
