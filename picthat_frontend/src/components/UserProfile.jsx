@@ -115,7 +115,7 @@ const UserProfile = () => {
         <div className='flex justify-center items-center w-full text-lg mt-2'>
           <p>
             Nothing to see here. Posts you{' '}
-            {text === 'Created' ? 'crate' : 'save'} will be shown here.
+            {text === 'Created' ? 'create' : 'save'} will be shown here.
           </p>
         </div>
       )}
