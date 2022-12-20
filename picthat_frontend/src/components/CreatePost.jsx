@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BsUpload, BsFillTrashFill } from 'react-icons/bs';
@@ -79,6 +79,10 @@ const CreatePost = ({ user }) => {
       setTimeout(() => setFilledAllFields(true), 2000);
     }
   };
+
+  useEffect(() => {
+    if (!user) navigate('/login');
+  }, [user]);
 
   return (
     <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
