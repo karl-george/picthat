@@ -16,7 +16,11 @@ const Wall = ({ user }) => {
   return (
     <div className='px-2 md:px-5'>
       <div className='bg-gray-50'>
-        <Navbar user={user} />
+        <Navbar
+          user={user}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
       </div>
       <div className='h-full'>
         <Routes>
@@ -27,12 +31,7 @@ const Wall = ({ user }) => {
             element={<PostDetails user={user} />}
           />
           <Route path='/create-post' element={<CreatePost user={user} />} />
-          <Route
-            path='/search'
-            element={
-              <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            }
-          />
+          <Route path='/search' element={<Search searchTerm={searchTerm} />} />
           <Route path='/user/:userId' element={<UserProfile />} />
         </Routes>
       </div>
