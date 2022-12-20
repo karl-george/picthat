@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+
+import MasonryLayout from './MasonryLayout';
+import Spinner from './Spinner';
+
 import { client } from '../client';
 import { postsQuery, searchQuery } from '../utils/queries';
 
-import Spinner from './Spinner';
-
-const Search = ({ searchTerm, setSearchTerm }) => {
+const Search = ({ searchTerm }) => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState(null);
 
@@ -28,7 +30,15 @@ const Search = ({ searchTerm, setSearchTerm }) => {
     }
   }, [searchTerm]);
 
-  return <div>{loading && <Spinner msg='Searching for posts' />}</div>;
+  return (
+    <div>
+      {loading && <Spinner msg='Searching for posts' />}
+      {posts?.length !== 0 && <MasonryLayout posts={posts} />}
+      {posts?.length === 0 && searchTerm !== '' && !loading && (
+        <div>No posts found</div>
+      )}
+    </div>
+  );
 };
 
 export default Search;
