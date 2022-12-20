@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
-import { BsCloudDownload, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import {
+  BsCloudDownload,
+  BsBookmark,
+  BsBookmarkFill,
+  BsTrash,
+} from 'react-icons/bs';
 
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
@@ -39,6 +44,12 @@ const Post = ({ post: { postedBy, image, _id, title, save } }) => {
     }
   };
 
+  const deletePost = (id) => {
+    client.delete(id).then(() => {
+      window.location.reload();
+    });
+  };
+
   return (
     <div className='m-2'>
       <div
@@ -68,6 +79,19 @@ const Post = ({ post: { postedBy, image, _id, title, save } }) => {
                   <BsCloudDownload />
                 </a>
               </div>
+
+              {postedBy?._id === user.sub && (
+                <button
+                  type='button'
+                  className='bg-white p-2 opacity-90 hover:opacity-100 font-bold text-base rounded-full hover:shadow-md outline-none'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deletePost(_id);
+                  }}
+                >
+                  <BsTrash color='red' />
+                </button>
+              )}
 
               {isBookmarked ? (
                 <button
