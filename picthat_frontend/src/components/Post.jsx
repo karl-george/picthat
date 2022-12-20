@@ -19,7 +19,7 @@ const Post = ({ post: { postedBy, image, _id, title, save } }) => {
   const user = fetchUser();
 
   // Double bang to force boolean
-  const isBookmarked = !!save?.filter((item) => item.postedBy._id === user.sub)
+  const isBookmarked = !!save?.filter((item) => item.postedBy._id === user?.sub)
     ?.length;
 
   const bookmarkPost = (id) => {
@@ -80,7 +80,7 @@ const Post = ({ post: { postedBy, image, _id, title, save } }) => {
                 </a>
               </div>
 
-              {postedBy?._id === user.sub && (
+              {postedBy?._id === user?.sub && (
                 <button
                   type='button'
                   className='bg-white p-2 opacity-90 hover:opacity-100 font-bold text-base rounded-full hover:shadow-md outline-none'
