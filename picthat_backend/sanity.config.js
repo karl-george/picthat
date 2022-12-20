@@ -7,9 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'picthat',
 
-  projectId: import.meta.env.SANITY_PROJECT_ID,
-
   dataset: 'production',
+  projectId: import.meta.env.SANITY_PROJECT_ID,
 
   plugins: [deskTool(), visionTool()],
 
