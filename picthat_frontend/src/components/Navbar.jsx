@@ -20,13 +20,23 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           className='p-2 w-full bg-gray-100 outline-none rounded-md'
         />
       </div>
-      <Link to={`user/${user?._id}`} className='md:block hidden'>
-        <img
-          src={user?.image}
-          alt='user icon'
-          className='w-14 h-12 rounded-lg'
-        />
-      </Link>
+      {user ? (
+        <Link to={`user/${user?._id}`} className='md:block hidden'>
+          <img
+            src={user?.image}
+            alt='user icon'
+            className='w-14 h-12 rounded-lg'
+          />
+        </Link>
+      ) : (
+        <button
+          type='button'
+          onClick={() => navigate('/login')}
+          className='bg-accent text-white rounded-lg p-3'
+        >
+          Login
+        </button>
+      )}
     </nav>
   );
 };
