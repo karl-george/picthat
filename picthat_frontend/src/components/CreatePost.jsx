@@ -16,6 +16,8 @@ const CreatePost = ({ user }) => {
   const [image, setImage] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
   const [filledAllFields, setFilledAllFields] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
 
@@ -165,13 +167,20 @@ const CreatePost = ({ user }) => {
                 ))}
               </select>
             </div>
-            <div className='flex justify-end items-end mt-5'>
+            <div className='flex justify-end items-end mt-5 relative'>
               <button
                 type='button'
-                onClick={savePost}
+                onClick={isDisabled ? void 0 : savePost}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
                 className='bg-accent text-white font-bold p-2 rounded-full w-28 outline-none'
               >
                 Save Post
+                {isHovered && (
+                  <p className='absolute top-10 text-black'>
+                    Disabled for moderation
+                  </p>
+                )}
               </button>
             </div>
           </div>
