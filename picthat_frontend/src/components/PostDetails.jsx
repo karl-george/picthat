@@ -130,29 +130,31 @@ const PostDetails = ({ user }) => {
               </div>
             ))}
           </div>
-          <div className='flex flex-wrap mt-6 gap-3 items-center'>
-            <Link to={`user/${postDetails.postedBy?._id}`}>
-              <img
-                src={user?.image}
-                alt='user-profile'
-                className='w-8 h-8 rounded-full cursor-pointer'
+          {user && (
+            <div className='flex flex-wrap mt-6 gap-3 items-center'>
+              <Link to={`user/${postDetails.postedBy?._id}`}>
+                <img
+                  src={user?.image}
+                  alt='user-profile'
+                  className='w-8 h-8 rounded-full cursor-pointer'
+                />
+              </Link>
+              <input
+                type='text'
+                placeholder='Add a comment'
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className='flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300'
               />
-            </Link>
-            <input
-              type='text'
-              placeholder='Add a comment'
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className='flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300'
-            />
-            <button
-              type='button'
-              onClick={addComment}
-              className='bg-accent text-white rounded-full px-6 py-2 font-semibold text-base outline-none'
-            >
-              {addingComment ? 'Posting' : 'Post'}
-            </button>
-          </div>
+              <button
+                type='button'
+                onClick={addComment}
+                className='bg-accent text-white rounded-full px-6 py-2 font-semibold text-base outline-none'
+              >
+                {addingComment ? 'Posting' : 'Post'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {extraPosts?.length > 0 ? (
