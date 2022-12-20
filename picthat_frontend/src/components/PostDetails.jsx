@@ -133,7 +133,7 @@ const PostDetails = ({ user }) => {
           <div className='flex flex-wrap mt-6 gap-3 items-center'>
             <Link to={`user/${postDetails.postedBy?._id}`}>
               <img
-                src={postDetails.postedBy?.image}
+                src={user?.image}
                 alt='user-profile'
                 className='w-8 h-8 rounded-full cursor-pointer'
               />
