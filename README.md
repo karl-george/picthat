@@ -4,6 +4,8 @@ A social media image sharing platform that allows users to sign in with their go
 
 Developed using Sanity, React and Tailwind CSS.
 
+[View site live](https://picthat.netlify.app/)
+
 ## Install Dependencies
 
 Use `npm install` to install any required dependencies.
